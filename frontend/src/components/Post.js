@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { FaThumbsDown, FaRegThumbsDown, FaThumbsUp, FaRegThumbsUp } from 'react-icons/fa/index'
+import { FaThumbsDown, FaRegThumbsDown, FaThumbsUp, FaRegThumbsUp, FaTrash, FaPen } from 'react-icons/fa/index'
 import { handleUpVotePost, handleDownVotePost } from '../actions/posts'
 
 class Post extends Component {
@@ -40,18 +40,18 @@ class Post extends Component {
         return (
             <div className='post'>
                 <h1> {title} </h1>
-                <p>Posted by {author} </p>
+                <p style={{'font-style':'italic'}}>Posted by {author} </p>
                 <ul className='footer'>
                     <li>
-
-
-                        <span className='icon'>{upVoted ? <FaThumbsUp onClick={this.upVote} /> :
+					<span className='icon'>{upVoted ? <FaThumbsUp onClick={this.upVote} /> :
                             <FaRegThumbsUp onClick={this.upVote} />} </span></li>
                     <li><span>{voteScore}</span></li>
-                    <li><span className='icon'>{downVoted ? <FaThumbsDown onClick={this.downVote} /> :
+                    <li className='bullet'><span className='icon'>{downVoted ? <FaThumbsDown onClick={this.downVote} /> :
                         <FaRegThumbsDown onClick={this.downVote} />}  </span>
                     </li>
-                    <li>{commentCount} comments </li>
+                    <li className='bullet'>{commentCount} comments </li>
+					<li className='bullet'><span className='icon'><FaPen /></span></li>
+					<li><span className='icon'><FaTrash /></span></li>
                 </ul>
             </div>
         )
