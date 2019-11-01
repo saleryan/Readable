@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import PostDetail from './PostDetail'
+import Post from './Post'
 import { NavLink } from 'react-router-dom'
 
 class Posts extends Component {
@@ -8,13 +8,13 @@ class Posts extends Component {
     render() {
         const { posts, categories } = this.props;
         return (
-            <div>
+            <div className='posts-container'>
                 <nav className='nav'>
                     <ul>
                         <li>
                             <NavLink to='/' exact activeClassName='active'>
                                 All
-          </NavLink>
+         				 </NavLink>
                         </li>
                         {categories.map(cat =>
                             (<li key={cat.name}>
@@ -25,8 +25,8 @@ class Posts extends Component {
                             ))}
                     </ul>
                 </nav>
-                {posts.length > 0 && <ul>
-                    {posts.map(post => <PostDetail id={post.id} key={post.id} />)}
+                {posts.length > 0 && <ul className='posts'>
+                    {posts.map(post => <Post id={post.id} key={post.id} />)}
                 </ul>}
                 {
                     posts.length === 0 &&
