@@ -1,10 +1,10 @@
 export const SET_AUTHEDUSER = 'SET_AUTHEDUSER';
 
-const user='testUser'
+const user = 'testUser'
 
 export default function setAuthedUser() {
- return {
- type: SET_AUTHEDUSER,
-  user
- }
+    return {
+        type: SET_AUTHEDUSER,
+        user
+    }
 }
