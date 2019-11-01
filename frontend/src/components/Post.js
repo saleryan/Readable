@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { FaThumbsDown, FaRegThumbsDown, FaThumbsUp, FaRegThumbsUp, FaTrash, FaPen } from 'react-icons/fa/index'
 import { handleUpVotePost, handleDownVotePost } from '../actions/posts'
+import { formatDate } from '../utils/helper';
 
 class Post extends Component {
     state = {
@@ -35,23 +36,23 @@ class Post extends Component {
     }
 
     render() {
-        const { title, author, commentCount, voteScore } = this.props;
+        const { title, author, commentCount, voteScore, timestamp } = this.props;
         const { upVoted, downVoted } = this.state;
         return (
             <div className='post'>
                 <h1> {title} </h1>
-                <p style={{'font-style':'italic'}}>Posted by {author} </p>
+                <p style={{ fontStyle: 'italic' }}>Posted by {author} on {formatDate(timestamp)}</p>
                 <ul className='footer'>
                     <li>
-					<span className='icon'>{upVoted ? <FaThumbsUp onClick={this.upVote} /> :
+                        <span className='icon'>{upVoted ? <FaThumbsUp onClick={this.upVote} /> :
                             <FaRegThumbsUp onClick={this.upVote} />} </span></li>
                     <li><span>{voteScore}</span></li>
                     <li className='bullet'><span className='icon'>{downVoted ? <FaThumbsDown onClick={this.downVote} /> :
                         <FaRegThumbsDown onClick={this.downVote} />}  </span>
                     </li>
                     <li className='bullet'>{commentCount} comments </li>
-					<li className='bullet'><span className='icon'><FaPen /></span></li>
-					<li><span className='icon'><FaTrash /></span></li>
+                    <li className='bullet'><span className='icon'><FaPen /></span></li>
+                    <li><span className='icon'><FaTrash /></span></li>
                 </ul>
             </div>
         )
@@ -66,7 +67,8 @@ function mapStateToProps(state, { id }) {
         voteScore: post.voteScore,
         commentCount: post.commentCount,
         id,
-        authedUser: state.authedUser
+        authedUser: state.authedUser,
+        timestamp: post.timestamp
     }
 }
 
