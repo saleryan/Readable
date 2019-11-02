@@ -72,14 +72,19 @@ select {
 /* posts */
 .posts-container {
 height: 100%;
+position:relative;
 }
 
 .posts {
  height: 100%; 
     display: flex;
     flex-direction: column;
-   
-  
+}
+
+.add-post {
+ position: fixed;
+  bottom: 0; 
+right: 0;
 }
 
 .top-bar {

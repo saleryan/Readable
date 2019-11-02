@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Post from './Post'
-import { NavLink } from 'react-router-dom'
-import { FaCaretUp, FaCaretDown } from 'react-icons/fa/index'
+import { NavLink, Link } from 'react-router-dom'
+import { FaCaretUp, FaCaretDown, FaPlusCircle } from 'react-icons/fa/index'
 
 
 const SORT_BY = {
@@ -78,6 +78,7 @@ class Posts extends Component {
                     sortedPosts.length === 0 &&
                     <p> There are no posts for this category </p>
                 }
+			 	<Link to='/add' className="add-post"><FaPlusCircle size={50} color='orange' /> </Link>
             </div>
         )
     }
