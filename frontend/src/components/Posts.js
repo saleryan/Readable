@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Post from './Post'
 import { NavLink, Link } from 'react-router-dom'
-import { FaCaretUp, FaCaretDown, FaPlusCircle } from 'react-icons/fa/index'
+import { FaLongArrowAltUp, FaLongArrowAltDown, FaPlusCircle } from 'react-icons/fa/index'
 
 
 const SORT_BY = {
@@ -68,7 +68,8 @@ class Posts extends Component {
                         <select onChange={this.handleChange} value={sortBy}>
                             {sortOptions.map(sortKey => <option key={sortKey} value={sortKey}>{sortKey} </option>)}
                         </select>
-                        {direction === DIRECTION.ASC ? <FaCaretUp onClick={this.handleSortAsc} /> : <FaCaretDown onClick={this.handleSortDesc} />}
+                        {direction === DIRECTION.ASC ? <FaLongArrowAltUp size={20} style={{marginBottom: '-5px'}} onClick={this.handleSortAsc} /> :
+													   <FaLongArrowAltDown size={20} style={{marginBottom: '-5px'}}  onClick={this.handleSortDesc} />}
                     </div>
                 </div>
                 {sortedPosts.length > 0 && <ul className='posts'>

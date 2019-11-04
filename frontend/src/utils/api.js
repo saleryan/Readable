@@ -65,7 +65,10 @@ export function getCommentsForPost(postId, authUser) {
     return fetch(url, {
         headers: { Authorization: authUser },
         credentials: "include"
-    }).then((res) => {
+     }).then((res) => {
         return res.json();
+    }).then(comments => {
+        return Object.assign({}, ...comments.map(comment => ({ [comment.id]: comment })))
+
     });
 }

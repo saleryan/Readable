@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import Posts from './Posts'
 import handleInitialData from '../actions/shared'
 import { connect } from 'react-redux'
+import PostDetail from './PostDetail'
 
 class App extends Component {
     componentDidMount() {
@@ -20,7 +21,7 @@ class App extends Component {
                     <BrowserRouter>
                         <Route exact path='/' component={Posts} />
                         <Route exact path='/:category' component={Posts} />
-
+						<Route exact path='/:category/:id' component={PostDetail} />
                     </BrowserRouter>
                 </div>
             </div>
