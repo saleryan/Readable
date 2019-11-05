@@ -73,13 +73,13 @@ class Posts extends Component {
                     </div>
                 </div>
                 {sortedPosts.length > 0 && <ul className='posts'>
-                    {posts.map(post => <Post id={post.id} key={post.id} />)}
+                    {posts.map(post => <li><Post id={post.id} key={post.id} /></li>)}
                 </ul>}
                 {
                     sortedPosts.length === 0 &&
                     <p> There are no posts for this category </p>
                 }
-			 	<Link to='/add' className="add-post"><FaPlusCircle size={50} color='orange' /> </Link>
+			 	<Link to='/addpost' className="add-post"><FaPlusCircle size={50} color='orange' /> </Link>
             </div>
         )
     }

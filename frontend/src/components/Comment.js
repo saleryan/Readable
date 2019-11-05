@@ -1,10 +1,56 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { FaThumbsDown, FaRegThumbsDown, FaThumbsUp, FaRegThumbsUp, FaTrash, FaPen } from 'react-icons/fa/index'
+import { handleUpVoteComment, handleDownVoteComment } from '../actions/comments'
+import { formatDate } from '../utils/helper';
 
 class Comment extends Component {
+  state = {
+        upVoted: false,
+        downVoted: false
+    }
+   downVote = () => {
+        if (this.state.downVoted) {
+            this.props.dispatch(handleUpVoteComment(this.props.authedUser, this.props.id));
+        } else {
+            this.props.dispatch(handleDownVoteComment(this.props.authedUser, this.props.id));
+        }
+        this.setState((prevState) => ({
+            ...prevState,
+            downVoted: !prevState.downVoted
+        }));
+    }
+
+    upVote = () => {
+        if (this.state.upVoted) {
+            this.props.dispatch(handleDownVoteComment(this.props.authedUser, this.props.comment.id));
+        } else {
+            this.props.dispatch(handleUpVoteComment(this.props.authedUser, this.props.id));
+        }
+
+        this.setState((prevState) => ({
+            ...prevState,
+            upVoted: !prevState.upVoted
+        }))
+    }
     render() {
-        const { body } = this.props.comment;
-        return (<div> {body} </div>)
+        const { body, voteScore, author, timestamp} = this.props.comment;
+ 		const { upVoted, downVoted } = this.state;
+        return (<div className='comment'>  
+                <p style={{ fontStyle: 'italic' }}>Posted by {author} on {formatDate(timestamp)}</p>
+                <p>{body} </p>                                                         	
+                <ul className='footer'>
+                <li>
+                            <span className='icon'>{upVoted ? <FaThumbsUp onClick={this.upVote} /> :
+                                <FaRegThumbsUp onClick={this.upVote} />} </span></li>
+                        <li><span>{voteScore}</span></li>
+                        <li className='bullet'><span className='icon'>{downVoted ? <FaThumbsDown onClick={this.downVote} /> :
+                            <FaRegThumbsDown onClick={this.downVote} />}  </span>
+                        </li>
+                        <li className='bullet'><span className='icon'><FaPen /></span></li>
+                        <li><span className='icon'><FaTrash /></span></li>
+				</ul>
+			</div>)
     }
 }
 

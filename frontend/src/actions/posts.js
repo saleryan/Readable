@@ -1,8 +1,8 @@
 import * as api from '../utils/api'
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
-export const UPVOTE ="UPVOTE"
-export const DOWNVOTE ="DOWNVOTE"
+export const UPVOTE_POST ="UPVOTE_POST"
+export const DOWNVOTE_POST ="DOWNVOTE_POST"
 
 export function receivePosts(posts) {
     return {
@@ -13,7 +13,7 @@ export function receivePosts(posts) {
 
 function upVotePost(id) {
     return {
-        type: UPVOTE,
+        type: UPVOTE_POST,
       id
       
        
@@ -22,7 +22,7 @@ function upVotePost(id) {
 
 function downVotePost(id) {
     return {
-        type: DOWNVOTE,
+        type: DOWNVOTE_POST,
       id
     }
 }

@@ -60,6 +60,26 @@ export function downVotePost(authUser, id) {
     });
 }
 
+export function upVoteComment(authUser, id) {
+    const url = `${api}/comments/${id}`;
+    return fetch(url, {
+        headers: { Authorization: authUser },
+        credentials: "include",
+        method: 'POST',
+        body: 'upVote'
+    });
+}
+
+export function downVoteComment(authUser, id) {
+    const url = `${api}/comments/${id}`;
+    return fetch(url, {
+        headers: { Authorization: authUser },
+        credentials: "include",
+        method: 'POST',
+        body: 'downVote'
+    });
+}
+
 export function getCommentsForPost(postId, authUser) {
     const url = `${api}/posts/${postId}/comments`;
     return fetch(url, {

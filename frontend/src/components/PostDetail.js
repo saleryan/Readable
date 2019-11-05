@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import Post from './Post'
 import Comment from './Comment'
 import { handleReceiveComments } from '../actions/comments'
+import {Link} from 'react-router-dom'
+import { FaPlusCircle } from 'react-icons/fa/index'
 
 class PostDetail extends Component {
     componentDidMount() {
@@ -15,11 +17,12 @@ class PostDetail extends Component {
         return (
             <div>
                 <Post id={id} showBody={true} />
-                <ul>
+                <ul className='comments'>
                     {
                         comments.length >0 && comments.map(comment => (<li key={comment.id}><Comment id={comment.id} /></li>))
                     }
                 </ul>
+				<Link to='/addcomment' className="add-comment"><FaPlusCircle size={50} color='orange' /> </Link>
             </div>
         )
     }

@@ -75,13 +75,14 @@ height: 100%;
 position:relative;
 }
 
-.posts {
+.posts, .comments {
  height: 100%; 
-    display: flex;
-    flex-direction: column;
+ display: flex;
+ flex-direction: column;
+ list-style-type: none;
 }
 
-.add-post {
+.add-post, .add-comment {
  position: fixed;
   bottom: 0; 
 right: 0;
@@ -93,7 +94,7 @@ right: 0;
 }
 /* Post */
 
-.post {
+.post, .comment {
  display: flex;
   flex-direction: column;
   border: 1px solid #eee;
@@ -105,22 +106,22 @@ right: 0;
  
 }
 
-.post > .footer {
+.post  > .footer, .comment > .footer {
  display: flex;
  justify-content: flex-start;
  padding: 0;
  margin: 10px 0
 }
 
-.post > .footer > li {
+.post > .footer > li, .comment > .footer > li {
  list-style-type: none;
 
 }
-.post .icon {
+.post .icon, .comment .icon {
  padding: 10px; 
 }
 
-.post > .footer > li.bullet::after {
+.post > .footer > li.bullet::after , .comment > .footer > li.bullet::after {
   content: '\2022';
   padding: 0 10px;
 }
