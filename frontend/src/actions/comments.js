@@ -1,8 +1,10 @@
 import * as api from '../utils/api'
-export const UPVOTE_COMMENT ="UPVOTE_COMMENT"
-export const DOWNVOTE_COMMENT ="DOWNVOTE_COMMENT"
+export const UPVOTE_COMMENT = "UPVOTE_COMMENT"
+export const DOWNVOTE_COMMENT = "DOWNVOTE_COMMENT"
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
 export const ADD_COMMENT = 'ADD_COMMENT'
+export const DELETE_COMMENT = 'DELETE_COMMENT'
+
 function receiveComments(comments) {
     return {
         type: RECEIVE_COMMENTS,
@@ -19,42 +21,48 @@ export function handleReceiveComments(authedUser, postId) {
     }
 }
 
+function deleteComment(id, parentId) {
+    return {
+        type: DELETE_COMMENT,
+        id,
+        parentId
+    }
+}
+
 function upVoteComment(id) {
     return {
         type: UPVOTE_COMMENT,
-      id
-      
-       
+        id
     }
 }
 
 function downVoteComment(id) {
     return {
         type: DOWNVOTE_COMMENT,
-      id
+        id
     }
 }
 
 function addComment(comment) {
- return {
- type: ADD_COMMENT,
-   comment
- }
+    return {
+        type: ADD_COMMENT,
+        comment
+    }
 }
 
 
-export function handleUpVoteComment(authedUser,id) {
+export function handleUpVoteComment(authedUser, id) {
     return (dispatch) => {
-        api.upVoteComment(authedUser,id)
+        api.upVoteComment(authedUser, id)
             .then(() => {
                 dispatch(upVoteComment(id))
             });
     }
 }
 
-export function handleDownVoteComment(authedUser,id) {
+export function handleDownVoteComment(authedUser, id) {
     return (dispatch) => {
-        api.downVoteComment(authedUser,id)
+        api.downVoteComment(authedUser, id)
             .then(() => {
                 dispatch(downVoteComment(id))
             });
@@ -65,6 +73,15 @@ export function handleAddComment(comment, authedUser) {
         api.addComment(comment, authedUser)
             .then((comment) => {
                 dispatch(addComment(comment))
+            });
+    }
+}
+
+export function handleDeleteComment(id, parentId, authedUser) {
+    return (dispatch) => {
+        api.deleteComment(id, authedUser)
+            .then(() => {
+                dispatch(deleteComment(id, parentId))
             });
     }
 }

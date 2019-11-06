@@ -4,6 +4,7 @@ export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const UPVOTE_POST = "UPVOTE_POST"
 export const DOWNVOTE_POST = "DOWNVOTE_POST"
 export const ADD_POST = "ADD_POST"
+export const DELETE_POST = "DELETE_POST"
 
 export function receivePosts(posts) {
     return {
@@ -18,6 +19,14 @@ function upVotePost(id) {
         id
     }
 }
+
+function deletePost(id) {
+    return {
+        type: DELETE_POST,
+        id
+    }
+}
+
 
 function downVotePost(id) {
     return {
@@ -66,6 +75,15 @@ export function handleAddPost(post, authedUser) {
         api.addPost(post, authedUser)
             .then((post) => {
                 dispatch(addPost(post))
+            });
+    }
+}
+
+export function handleDeletePost(id, authedUser) {
+    return (dispatch) => {
+        api.deletePost(id, authedUser)
+            .then(() => {
+                dispatch(deletePost(id))
             });
     }
 }

@@ -91,7 +91,7 @@ function mapStateToProps(state, props) {
     return {
         posts: Object.keys(state.posts)
             .map(id => state.posts[id])
-            .filter(post => post.category === category || !category),
+            .filter(post => (post.category === category || !category) && !post.deleted),
         categories: Object.keys(state.categories)
             .map(name => state.categories[name])
     }

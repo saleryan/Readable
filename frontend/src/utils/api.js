@@ -48,6 +48,19 @@ export function addPost(post, authedUser) {
     });
 }
 
+export function deletePost(id, authedUser) {
+    const url = `${api}/posts/${id}`;
+   
+    return fetch(url, {
+        method: 'DELETE',
+        headers: { Authorization: authedUser },
+        credentials: "include"
+    }).then((res) => {
+        return res.json();
+    })
+}
+
+
 export function getPosts(authUser) {
     const url = `${api}/posts`;
     return fetch(url, {
@@ -131,3 +144,18 @@ export function addComment(comment, authedUser) {
         return Object.assign({}, { [comment.id]: comment })
     });
 }
+
+export function deleteComment(id, authedUser) {
+    const url = `${api}/comments/${id}`;
+   
+    return fetch(url, {
+        method: 'DELETE',
+        headers: { Authorization: authedUser },
+        credentials: "include"
+    }).then((res) => {
+        return res.json();
+    })
+}
+
+
+

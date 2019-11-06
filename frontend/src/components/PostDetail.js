@@ -22,7 +22,7 @@ class PostDetail extends Component {
                         comments.length > 0 && comments.map(comment => (<li key={comment.id}><Comment id={comment.id} /></li>))
                     }
                 </ul>
-                <Link to={`/comments/add/${id}`} className="add-comment"><FaPlusCircle size={50} color='orange' /> </Link>
+                <Link to = {`/comments/add/${id}` } className="add-comment"><FaPlusCircle size={50} color='orange' /> </Link>
             </div>
         )
     }
@@ -38,7 +38,7 @@ function mapStateToProps(state, props) {
                 parentId: state.comments[commentId].parentId,
                 id: state.comments[commentId].id,
                 body: state.comments[commentId].body
-            })).filter(comment => comment.parentId === id)
+            })).filter(comment => comment.parentId === id && !comment.deleted)
     }
 }
 

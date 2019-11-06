@@ -23,8 +23,9 @@ class App extends Component {
                     <BrowserRouter>
                         <Route exact path='/' component={Posts} />
                         <Route exact path='/:category' component={Posts} />
-						<Route exact path='/:category/:id' component={PostDetail} />
 						<Route exact path='/posts/add' component={NewPost} />
+						<Route exact path='/:category/:id(\w{21,22})' component={PostDetail} />
+						
 						<Route exact path='/comments/add/:id' component={NewComment} />
                     </BrowserRouter>
                 </div>

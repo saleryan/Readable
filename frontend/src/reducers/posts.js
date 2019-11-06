@@ -1,10 +1,12 @@
 import {
     RECEIVE_POSTS, UPVOTE_POST,
-    DOWNVOTE_POST, ADD_POST
+    DOWNVOTE_POST, ADD_POST,
+    DELETE_POST
 } from '../actions/posts'
 
 import {
-    ADD_COMMENT
+    ADD_COMMENT,
+    DELETE_COMMENT
 } from '../actions/comments'
 
 export default function categories(state = {}, action) {
@@ -37,6 +39,20 @@ export default function categories(state = {}, action) {
                     commentCount: state[parentId].commentCount + 1
                 }
             }
+        case DELETE_POST: return {
+         ...state,
+          [action.id] : {
+           ...[action.id],
+           deleted: true
+          }
+        }
+      case DELETE_COMMENT: return {
+        ...state,
+        [action.parentId]: {
+        ...state[action.parentId],
+         commentCount: state[action.parentId].commentCount - 1
+        }
+      }
         default: return state
     }
 }

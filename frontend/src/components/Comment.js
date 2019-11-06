@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { FaThumbsDown, FaRegThumbsDown, FaThumbsUp, FaRegThumbsUp, FaTrash, FaPen } from 'react-icons/fa/index'
-import { handleUpVoteComment, handleDownVoteComment } from '../actions/comments'
+import { handleUpVoteComment, handleDownVoteComment, handleDeleteComment } from '../actions/comments'
 import { formatDate } from '../utils/helper';
 
 class Comment extends Component {
@@ -9,6 +9,13 @@ class Comment extends Component {
         upVoted: false,
         downVoted: false
     }
+
+	delete = () => {
+      const {authedUser} = this.props;
+      const {id ,parentId} = this.props.comment;
+      this.props.dispatch(handleDeleteComment(id, parentId, authedUser));
+    }
+
     downVote = () => {
         if (this.state.downVoted) {
             this.props.dispatch(handleUpVoteComment(this.props.authedUser, this.props.id));
@@ -48,7 +55,7 @@ class Comment extends Component {
                     <FaRegThumbsDown onClick={this.downVote} />}  </span>
                 </li>
                 <li className='bullet'><span className='icon'><FaPen /></span></li>
-                <li><span className='icon'><FaTrash /></span></li>
+                <li><span className='icon'><FaTrash onClick = {this.delete} /></span></li>
             </ul>
         </div>)
     }

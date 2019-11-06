@@ -1,6 +1,7 @@
 import {
     RECEIVE_COMMENTS, UPVOTE_COMMENT,
-    DOWNVOTE_COMMENT, ADD_COMMENT
+    DOWNVOTE_COMMENT, ADD_COMMENT,
+    DELETE_COMMENT
 } from '../actions/comments'
 
 export default function categories(state = {}, action) {
@@ -9,7 +10,7 @@ export default function categories(state = {}, action) {
             ...state,
             ...action.comments
         }
-        
+
         case UPVOTE_COMMENT: return {
             ...state,
             [action.id]: {
@@ -30,7 +31,14 @@ export default function categories(state = {}, action) {
             ...state,
             ...action.comment
         }
-        
+        case DELETE_COMMENT: return {
+            ...state,
+            [action.id]: {
+                ...[action.id],
+                deleted: true
+            }
+        }
+
         default: return state
     }
 }
