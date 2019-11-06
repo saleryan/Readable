@@ -113,3 +113,21 @@ export function getCommentsForPost(postId, authUser) {
 
     });
 }
+
+export function addComment(comment, authedUser) {
+    const url = `${api}/comments`;
+    comment.id = generateUID();
+    comment.timestamp = Date.now();
+    return fetch(url, {
+        method: 'POST',
+        headers: { Authorization: authedUser },
+        credentials: "include"
+    }).then((res) => {
+        return res.json();
+    }).then(newComment => {
+        for (let prop of Object.keys(newComment)) {
+            comment[prop] = newComment[prop];
+        }
+        return Object.assign({}, { [comment.id]: comment })
+    });
+}

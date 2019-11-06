@@ -10,6 +10,7 @@ class NewPost extends Component {
         title: '',
         category: ''
     }
+
     handleChange = (e) => {
         const value = e.target.value;
         const name = e.target.name;
@@ -58,7 +59,6 @@ class NewPost extends Component {
                         value={body}
                         name='body'
                         onChange={this.handleChange}
-                        className='textarea'
                         maxLength={280}
                     />
 
@@ -71,7 +71,7 @@ class NewPost extends Component {
                         type='submit'
                         disabled={body === '' || title === '' || category === ''}>
                         Submit
-          </button>
+          			</button>
                 </form>
             </div>
         )

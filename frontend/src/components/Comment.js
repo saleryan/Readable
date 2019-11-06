@@ -5,11 +5,11 @@ import { handleUpVoteComment, handleDownVoteComment } from '../actions/comments'
 import { formatDate } from '../utils/helper';
 
 class Comment extends Component {
-  state = {
+    state = {
         upVoted: false,
         downVoted: false
     }
-   downVote = () => {
+    downVote = () => {
         if (this.state.downVoted) {
             this.props.dispatch(handleUpVoteComment(this.props.authedUser, this.props.id));
         } else {
@@ -34,28 +34,28 @@ class Comment extends Component {
         }))
     }
     render() {
-        const { body, voteScore, author, timestamp} = this.props.comment;
- 		const { upVoted, downVoted } = this.state;
-        return (<div className='comment'>  
-                <p style={{ fontStyle: 'italic' }}>Posted by {author} on {formatDate(timestamp)}</p>
-                <p>{body} </p>                                                         	
-                <ul className='footer'>
+        const { body, voteScore, author, timestamp } = this.props.comment;
+        const { upVoted, downVoted } = this.state;
+        return (<div className='comment'>
+            <p style={{ fontStyle: 'italic' }}>Posted by {author} on {formatDate(timestamp)}</p>
+            <p>{body} </p>
+            <ul className='footer'>
                 <li>
-                            <span className='icon'>{upVoted ? <FaThumbsUp onClick={this.upVote} /> :
-                                <FaRegThumbsUp onClick={this.upVote} />} </span></li>
-                        <li><span>{voteScore}</span></li>
-                        <li className='bullet'><span className='icon'>{downVoted ? <FaThumbsDown onClick={this.downVote} /> :
-                            <FaRegThumbsDown onClick={this.downVote} />}  </span>
-                        </li>
-                        <li className='bullet'><span className='icon'><FaPen /></span></li>
-                        <li><span className='icon'><FaTrash /></span></li>
-				</ul>
-			</div>)
+                    <span className='icon'>{upVoted ? <FaThumbsUp onClick={this.upVote} /> :
+                        <FaRegThumbsUp onClick={this.upVote} />} </span></li>
+                <li><span>{voteScore}</span></li>
+                <li className='bullet'><span className='icon'>{downVoted ? <FaThumbsDown onClick={this.downVote} /> :
+                    <FaRegThumbsDown onClick={this.downVote} />}  </span>
+                </li>
+                <li className='bullet'><span className='icon'><FaPen /></span></li>
+                <li><span className='icon'><FaTrash /></span></li>
+            </ul>
+        </div>)
     }
 }
 
 function mapStateToProps(state, { id }) {
-    
+
     const comment = state.comments ? state.comments[id] : null;
 
     return {

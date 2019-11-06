@@ -3,6 +3,10 @@ import {
     DOWNVOTE_POST, ADD_POST
 } from '../actions/posts'
 
+import {
+    ADD_COMMENT
+} from '../actions/comments'
+
 export default function categories(state = {}, action) {
     switch (action.type) {
         case RECEIVE_POSTS: return { ...state, ...action.posts }
@@ -23,7 +27,16 @@ export default function categories(state = {}, action) {
         }
 
         case ADD_POST: return { ...state, ...action.post }
+        case ADD_COMMENT:
+            const parentId = action.comment[Object.keys(action.comment)[0]].parentId;
 
+            return {
+                ...state,
+                [parentId]: {
+                    ...state[parentId],
+                    commentCount: state[parentId].commentCount + 1
+                }
+            }
         default: return state
     }
 }
