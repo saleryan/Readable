@@ -4,6 +4,7 @@ import Posts from './Posts'
 import handleInitialData from '../actions/shared'
 import { connect } from 'react-redux'
 import PostDetail from './PostDetail'
+import NewPost from './NewPost'
 
 class App extends Component {
     componentDidMount() {
@@ -22,6 +23,7 @@ class App extends Component {
                         <Route exact path='/' component={Posts} />
                         <Route exact path='/:category' component={Posts} />
 						<Route exact path='/:category/:id' component={PostDetail} />
+						<Route exact path='/posts/add' component={NewPost} />
                     </BrowserRouter>
                 </div>
             </div>

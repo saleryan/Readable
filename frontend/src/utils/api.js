@@ -26,6 +26,27 @@ export function getCategories(authUser) {
 
     });
 }
+function generateUID() {
+    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+}
+
+export function addPost(post, authedUser) {
+    const url = `${api}/posts`;
+    post.id = generateUID();
+    post.timestamp = Date.now();
+    return fetch(url, {
+        method: 'POST',
+        headers: { Authorization: authedUser },
+        credentials: "include"
+    }).then((res) => {
+        return res.json();
+    }).then(newPost => {
+        for (let prop of Object.keys(newPost)) {
+            post[prop] = newPost[prop];
+        }
+        return Object.assign({}, { [post.id]: post })
+    });
+}
 
 export function getPosts(authUser) {
     const url = `${api}/posts`;
@@ -85,7 +106,7 @@ export function getCommentsForPost(postId, authUser) {
     return fetch(url, {
         headers: { Authorization: authUser },
         credentials: "include"
-     }).then((res) => {
+    }).then((res) => {
         return res.json();
     }).then(comments => {
         return Object.assign({}, ...comments.map(comment => ({ [comment.id]: comment })))

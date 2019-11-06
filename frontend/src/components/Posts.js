@@ -65,21 +65,21 @@ class Posts extends Component {
                     <div className='sort'>
 
                         <label> Sort By </label>
-                        <select onChange={this.handleChange} value={sortBy}>
+                        <select className='sort' onChange={this.handleChange} value={sortBy}>
                             {sortOptions.map(sortKey => <option key={sortKey} value={sortKey}>{sortKey} </option>)}
                         </select>
-                        {direction === DIRECTION.ASC ? <FaLongArrowAltUp size={20} style={{marginBottom: '-5px'}} onClick={this.handleSortAsc} /> :
-													   <FaLongArrowAltDown size={20} style={{marginBottom: '-5px'}}  onClick={this.handleSortDesc} />}
+                        {direction === DIRECTION.ASC ? <FaLongArrowAltUp size={20} style={{ marginBottom: '-5px' }} onClick={this.handleSortAsc} /> :
+                            <FaLongArrowAltDown size={20} style={{ marginBottom: '-5px' }} onClick={this.handleSortDesc} />}
                     </div>
                 </div>
                 {sortedPosts.length > 0 && <ul className='posts'>
-                    {posts.map(post => <li><Post id={post.id} key={post.id} /></li>)}
+                    {posts.map(post => <li key={post.id}><Post key={post.id} id={post.id} /></li>)}
                 </ul>}
                 {
                     sortedPosts.length === 0 &&
                     <p> There are no posts for this category </p>
                 }
-			 	<Link to='/addpost' className="add-post"><FaPlusCircle size={50} color='orange' /> </Link>
+                <Link to='/posts/add' className="add-post"><FaPlusCircle size={50} color='orange' /> </Link>
             </div>
         )
     }

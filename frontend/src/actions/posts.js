@@ -1,8 +1,9 @@
 import * as api from '../utils/api'
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
-export const UPVOTE_POST ="UPVOTE_POST"
-export const DOWNVOTE_POST ="DOWNVOTE_POST"
+export const UPVOTE_POST = "UPVOTE_POST"
+export const DOWNVOTE_POST = "DOWNVOTE_POST"
+export const ADD_POST = "ADD_POST"
 
 export function receivePosts(posts) {
     return {
@@ -14,16 +15,21 @@ export function receivePosts(posts) {
 function upVotePost(id) {
     return {
         type: UPVOTE_POST,
-      id
-      
-       
+        id
     }
 }
 
 function downVotePost(id) {
     return {
         type: DOWNVOTE_POST,
-      id
+        id
+    }
+}
+
+function addPost(post) {
+    return {
+        type: ADD_POST,
+        post
     }
 }
 
@@ -37,20 +43,29 @@ export function handleReceivePosts(authedUser) {
     }
 }
 
-export function handleUpVotePost(authedUser,id) {
+export function handleUpVotePost(authedUser, id) {
     return (dispatch) => {
-        api.upVotePost(authedUser,id)
+        api.upVotePost(authedUser, id)
             .then(() => {
                 dispatch(upVotePost(id))
             });
     }
 }
 
-export function handleDownVotePost(authedUser,id) {
+export function handleDownVotePost(authedUser, id) {
     return (dispatch) => {
-        api.downVotePost(authedUser,id)
+        api.downVotePost(authedUser, id)
             .then(() => {
                 dispatch(downVotePost(id))
+            });
+    }
+}
+
+export function handleAddPost(post, authedUser) {
+    return (dispatch) => {
+        api.addPost(post, authedUser)
+            .then((post) => {
+                dispatch(addPost(post))
             });
     }
 }
