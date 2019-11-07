@@ -29,8 +29,14 @@ export default function categories(state = {}, action) {
         }
 
         case ADD_POST: return { ...state, ...action.post }
-        case EDIT_POST: return {...state,
-                              [action.post.id]: action.post
+        case EDIT_POST: const id = Object.keys(action.post)[0];
+        
+        				return {...state,
+                               [id]: {
+                               ...state[id],
+                               body: action.post[id].body,
+                               title: action.post[id].title
+                              }
                              }
         
         case ADD_COMMENT:

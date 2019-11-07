@@ -18,7 +18,8 @@ export function getCategories(authUser) {
     const url = `${api}/categories`;
     return fetch(url, {
         headers: { Authorization: authUser },
-        credentials: "include"
+        credentials: "include",
+      
     }).then((res) => {
         return res.json();
     }).then(result => {
@@ -37,7 +38,8 @@ export function addPost(post, authedUser) {
     return fetch(url, {
         method: 'POST',
         headers: { Authorization: authedUser },
-        credentials: "include"
+        credentials: "include",
+        body: JSON.stringify(post)
     }).then((res) => {
         return res.json();
     }).then(newPost => {
@@ -53,11 +55,11 @@ export function editPost(post, authedUser) {
     return fetch(url, {
         method: 'PUT',
         headers: { Authorization: authedUser },
-        credentials: "include"
-    }).then((res) => {
-        return res.json();
-    }).then(newPost => {
-        return Object.assign({}, { [newPost.id]: newPost })
+        credentials: "include",
+        body: JSON.stringify(post)
+    
+    }).then(() => {
+        return Object.assign({}, { [post.id]: post })
     });
 }
 

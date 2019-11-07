@@ -5,7 +5,7 @@ import EditablePost from './EditablePost'
 
 class EditPost extends Component {
     handleSubmit = ({body, title}, authedUser) => {
-        this.props.dispatch(handleEditPost({body, title}, authedUser))
+        this.props.dispatch(handleEditPost({id: this.props.id, body, title}, authedUser))
     }
 
     render() {
