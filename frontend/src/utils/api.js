@@ -1,19 +1,6 @@
 const api = process.env.REACT_APP_BACKEND || 'http://localhost:3001';
 // To run outside of the Workspace, please do not include the credentials.
 
-/* 
-
-  const api = process.env.REACT_APP_BACKEND ||  'http://localhost:3001';
-  const url = `${api}/categories`;
-  console.log('fetching from url', url);
-  fetch(url, { headers: { 'Authorization': 'whatever-you-want' }} )
-    .then( (res) => { return(res.text()) })
-    .then((data) => {
-      this.setState({backend:data});
-    });
-}
-*/
-
 export function getCategories(authUser) {
     const url = `${api}/categories`;
     return fetch(url, {
