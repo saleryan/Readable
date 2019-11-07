@@ -1,7 +1,7 @@
 import {
     RECEIVE_COMMENTS, UPVOTE_COMMENT,
     DOWNVOTE_COMMENT, ADD_COMMENT,
-    DELETE_COMMENT
+    DELETE_COMMENT, EDIT_COMMENT
 } from '../actions/comments'
 
 export default function categories(state = {}, action) {
@@ -38,6 +38,15 @@ export default function categories(state = {}, action) {
                 deleted: true
             }
         }
+        case EDIT_COMMENT: const id = Object.keys(action.comment)[0];
+
+            return {
+                ...state,
+                [id]: {
+                    ...state[id],
+                    body: action.comment[id].body
+                }
+            }
 
         default: return state
     }

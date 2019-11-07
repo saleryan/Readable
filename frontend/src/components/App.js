@@ -7,6 +7,7 @@ import PostDetail from './PostDetail'
 import NewPost from './NewPost'
 import NewComment from './NewComment'
 import EditPost from './EditPost'
+import EditComment from './EditComment'
 
 class App extends Component {
     componentDidMount() {
@@ -27,8 +28,8 @@ class App extends Component {
 						<Route exact path='/posts/add' component={NewPost} />
 						<Route exact path='/posts/edit/:id' component={EditPost} />
 						<Route exact path='/:category/:id(\w{10,})' component={PostDetail} />
-						
-						<Route exact path='/comments/add/:id' component={NewComment} />
+						<Route exact path='/comments/edit/:parentId/:id' component={EditComment} />
+						<Route exact path='/comments/add/:parentId' component={NewComment} />
                     </BrowserRouter>
                 </div>
             </div>

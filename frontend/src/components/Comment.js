@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { FaThumbsDown, FaRegThumbsDown, FaThumbsUp, FaRegThumbsUp, FaTrash, FaPen } from 'react-icons/fa/index'
 import { handleUpVoteComment, handleDownVoteComment, handleDeleteComment } from '../actions/comments'
 import { formatDate } from '../utils/helper';
+import {Link} from 'react-router-dom'
 
 class Comment extends Component {
     state = {
@@ -40,8 +41,9 @@ class Comment extends Component {
             upVoted: !prevState.upVoted
         }))
     }
+
     render() {
-        const { body, voteScore, author, timestamp } = this.props.comment;
+        const { body, voteScore, author, timestamp, id, parentId } = this.props.comment;
         const { upVoted, downVoted } = this.state;
         return (<div className='comment'>
             <p style={{ fontStyle: 'italic' }}>Posted by {author} on {formatDate(timestamp)}</p>
@@ -54,7 +56,13 @@ class Comment extends Component {
                 <li className='bullet'><span className='icon'>{downVoted ? <FaThumbsDown onClick={this.downVote} /> :
                     <FaRegThumbsDown onClick={this.downVote} />}  </span>
                 </li>
-                <li className='bullet'><span className='icon'><FaPen /></span></li>
+                <li className='bullet'>
+                            <span className='icon'>
+                                <Link to={`/comments/edit/${parentId}/${id}`} >
+                                    <FaPen />
+                                </Link>
+                            </span>
+                 </li>
                 <li><span className='icon'><FaTrash onClick = {this.delete} /></span></li>
             </ul>
         </div>)

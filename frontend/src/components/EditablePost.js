@@ -35,7 +35,7 @@ class EditablePost extends Component {
 
     render() {
         const { body, title, category, toHome } = this.state;
-        const { categories, header, showCategory} = this.props;
+        const { categories, header, showCategory } = this.props;
         if (toHome === true) {
             return <Redirect to='/' />
         }
@@ -59,11 +59,11 @@ class EditablePost extends Component {
                         maxLength={280}
                     />
 
-					{showCategory && <select value={category} name='category' onChange={this.handleChange}>
+                    {showCategory && <select value={category} name='category' onChange={this.handleChange}>
                         <option key='none'> </option>
                         {categories.map(cat => <option key={cat.name} id={cat.name}> {cat.name} </option>)}
                     </select>
-					}
+                    }
 
                     <button
                         type='submit'
@@ -75,16 +75,16 @@ class EditablePost extends Component {
         )
     }
 }
-function mapStateToProps(state, {id, handleSubmit, header, showCategory = true}) {
-   
+function mapStateToProps(state, { id, handleSubmit, header, showCategory = true }) {
+
     return {
         id,
         header,
-      	handleSubmit,
+        handleSubmit,
         showCategory,
-        body: id? state.posts[id].body : "",
-        title: id? state.posts[id].title : "",
-        category: id? state.posts[id].category : "",
+        body: id ? state.posts[id].body : "",
+        title: id ? state.posts[id].title : "",
+        category: id ? state.posts[id].category : "",
         authedUser: state.authedUser,
         categories: Object.keys(state.categories)
             .map(name => state.categories[name])

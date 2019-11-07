@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { FaThumbsDown, FaRegThumbsDown, FaThumbsUp, FaRegThumbsUp, FaTrash, FaPen } from 'react-icons/fa/index'
 import { handleUpVotePost, handleDownVotePost, handleDeletePost } from '../actions/posts'
 import { formatDate } from '../utils/helper';
-import { withRouter, Link, Redirect} from 'react-router-dom'
+import { withRouter, Link, Redirect } from 'react-router-dom'
 
 class Post extends Component {
     state = {
@@ -11,13 +11,13 @@ class Post extends Component {
         downVoted: false,
         toHome: false
     }
-	delete = () => {
-      const {authedUser, id} = this.props;
-       this.props.dispatch(handleDeletePost(id, authedUser));
-      this.setState((prevState) => ({
-        ...prevState,
-        toHome: true
-      }));
+    delete = () => {
+        const { authedUser, id } = this.props;
+        this.props.dispatch(handleDeletePost(id, authedUser));
+        this.setState((prevState) => ({
+            ...prevState,
+            toHome: true
+        }));
     }
 
     downVote = () => {
@@ -51,12 +51,11 @@ class Post extends Component {
     }
 
     render() {
-       
         const showBody = this.props.showBody;
         const { upVoted, downVoted, toHome } = this.state;
-       if (toHome) {
-        return <Redirect to='/' />
-       }
+        if (toHome) {
+            return <Redirect to='/' />
+        }
         if (this.props.post) {
             const { title, author, commentCount, voteScore, timestamp, category, id, body } = this.props.post;
             return (
@@ -74,14 +73,14 @@ class Post extends Component {
                         </li>
                         <li className='bullet'>{commentCount} comments </li>
                         <li className='bullet'>
-							<span className='icon'>
-							<Link to = {`/posts/edit/${id}` } >
-								<FaPen />
-								</Link>
-							</span>
-						
-						</li>
-                        <li><span className='icon'><FaTrash onClick = {this.delete} /></span></li>
+                            <span className='icon'>
+                                <Link to={`/posts/edit/${id}`} >
+                                    <FaPen />
+                                </Link>
+                            </span>
+
+                        </li>
+                        <li><span className='icon'><FaTrash onClick={this.delete} /></span></li>
                     </ul>
                 </div>
             )

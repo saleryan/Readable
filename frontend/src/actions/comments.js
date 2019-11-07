@@ -4,6 +4,7 @@ export const DOWNVOTE_COMMENT = "DOWNVOTE_COMMENT"
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
 export const ADD_COMMENT = 'ADD_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
+export const EDIT_COMMENT = 'EDIT_COMMENT'
 
 function receiveComments(comments) {
     return {
@@ -50,6 +51,13 @@ function addComment(comment) {
     }
 }
 
+function editComment(comment) {
+    return {
+        type: EDIT_COMMENT,
+        comment
+    }
+}
+
 
 export function handleUpVoteComment(authedUser, id) {
     return (dispatch) => {
@@ -76,6 +84,16 @@ export function handleAddComment(comment, authedUser) {
             });
     }
 }
+
+export function handleEditComment(comment, authedUser) {
+    return (dispatch) => {
+        api.editComment(comment, authedUser)
+            .then((comment) => {
+                dispatch(editComment(comment))
+            });
+    }
+}
+
 
 export function handleDeleteComment(id, parentId, authedUser) {
     return (dispatch) => {

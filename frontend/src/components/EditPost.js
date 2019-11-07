@@ -4,24 +4,24 @@ import { connect } from 'react-redux'
 import EditablePost from './EditablePost'
 
 class EditPost extends Component {
-    handleSubmit = ({body, title}, authedUser) => {
-        this.props.dispatch(handleEditPost({id: this.props.id, body, title}, authedUser))
+    handleSubmit = ({ body, title }, authedUser) => {
+        this.props.dispatch(handleEditPost({ id: this.props.id, body, title }, authedUser))
     }
 
     render() {
         return (
-          <EditablePost id={this.props.id} 
-          header={'Edit Post'} 
-			showCategory={false} 
-			handleSubmit={this.handleSubmit}/>
+            <EditablePost id={this.props.id}
+                header={'Edit Post'}
+                showCategory={false}
+                handleSubmit={this.handleSubmit} />
         )
     }
 }
 
 function mapStateToProps(state, props) {
- return {
-  id: props.match.params.id
- }
+    return {
+        id: props.match.params.id
+    }
 }
 
 export default connect(mapStateToProps)(EditPost)

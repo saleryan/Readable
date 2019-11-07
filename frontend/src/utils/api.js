@@ -149,13 +149,28 @@ export function addComment(comment, authedUser) {
     return fetch(url, {
         method: 'POST',
         headers: { Authorization: authedUser },
-        credentials: "include"
+        credentials: "include",
+        body: JSON.stringify(comment)
     }).then((res) => {
         return res.json();
     }).then(newComment => {
         for (let prop of Object.keys(newComment)) {
             comment[prop] = newComment[prop];
         }
+        return Object.assign({}, { [comment.id]: comment })
+    });
+}
+
+export function editComment(comment, authedUser) {
+    const url = `${api}/comments/${comment.id}`;
+    comment.timestamp = Date.now();
+  
+    return fetch(url, {
+        method: 'PUT',
+        headers: { Authorization: authedUser },
+        credentials: "include",
+        body: JSON.stringify(comment)
+    }).then(() => {
         return Object.assign({}, { [comment.id]: comment })
     });
 }
