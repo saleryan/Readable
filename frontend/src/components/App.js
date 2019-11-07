@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import PostDetail from './PostDetail'
 import NewPost from './NewPost'
 import NewComment from './NewComment'
+import EditPost from './EditPost'
 
 class App extends Component {
     componentDidMount() {
@@ -24,7 +25,8 @@ class App extends Component {
                         <Route exact path='/' component={Posts} />
                         <Route exact path='/:category' component={Posts} />
 						<Route exact path='/posts/add' component={NewPost} />
-						<Route exact path='/:category/:id(\w{21,22})' component={PostDetail} />
+						<Route exact path='/posts/edit/:id' component={EditPost} />
+						<Route exact path='/:category/:id(\w{10,})' component={PostDetail} />
 						
 						<Route exact path='/comments/add/:id' component={NewComment} />
                     </BrowserRouter>

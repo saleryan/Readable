@@ -65,7 +65,14 @@ class Post extends Component {
                             <FaRegThumbsDown onClick={this.downVote} />}  </span>
                         </li>
                         <li className='bullet'>{commentCount} comments </li>
-                        <li className='bullet'><span className='icon'><FaPen /></span></li>
+                        <li className='bullet'>
+							<span className='icon'>
+							<Link to = {`/posts/edit/${id}` } >
+								<FaPen />
+								</Link>
+							</span>
+						
+						</li>
                         <li><span className='icon'><FaTrash onClick = {this.delete} /></span></li>
                     </ul>
                 </div>

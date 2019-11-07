@@ -55,7 +55,7 @@ class Posts extends Component {
                             </li>
                             {categories.map(cat =>
                                 (<li key={cat.name}>
-                                    <NavLink to={cat.path} activeClassName='active'>
+                                    <NavLink key={cat.name} to={cat.path} activeClassName='active'>
                                         {cat.name}
                                     </NavLink>
                                 </li>

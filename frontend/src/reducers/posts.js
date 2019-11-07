@@ -1,7 +1,7 @@
 import {
     RECEIVE_POSTS, UPVOTE_POST,
     DOWNVOTE_POST, ADD_POST,
-    DELETE_POST
+    DELETE_POST, EDIT_POST
 } from '../actions/posts'
 
 import {
@@ -29,6 +29,10 @@ export default function categories(state = {}, action) {
         }
 
         case ADD_POST: return { ...state, ...action.post }
+        case EDIT_POST: return {...state,
+                              [action.post.id]: action.post
+                             }
+        
         case ADD_COMMENT:
             const parentId = action.comment[Object.keys(action.comment)[0]].parentId;
 

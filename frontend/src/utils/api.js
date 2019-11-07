@@ -48,6 +48,19 @@ export function addPost(post, authedUser) {
     });
 }
 
+export function editPost(post, authedUser) {
+    const url = `${api}/posts/${post.id}`;
+    return fetch(url, {
+        method: 'PUT',
+        headers: { Authorization: authedUser },
+        credentials: "include"
+    }).then((res) => {
+        return res.json();
+    }).then(newPost => {
+        return Object.assign({}, { [newPost.id]: newPost })
+    });
+}
+
 export function deletePost(id, authedUser) {
     const url = `${api}/posts/${id}`;
    

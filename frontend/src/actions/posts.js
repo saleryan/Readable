@@ -5,6 +5,7 @@ export const UPVOTE_POST = "UPVOTE_POST"
 export const DOWNVOTE_POST = "DOWNVOTE_POST"
 export const ADD_POST = "ADD_POST"
 export const DELETE_POST = "DELETE_POST"
+export const EDIT_POST = "EDIT_POST"
 
 export function receivePosts(posts) {
     return {
@@ -42,6 +43,13 @@ function addPost(post) {
     }
 }
 
+function editPost(post) {
+ return {
+  type: EDIT_POST,
+  post
+ }
+}
+
 
 export function handleReceivePosts(authedUser) {
     return (dispatch) => {
@@ -75,6 +83,15 @@ export function handleAddPost(post, authedUser) {
         api.addPost(post, authedUser)
             .then((post) => {
                 dispatch(addPost(post))
+            });
+    }
+}
+
+export function handleEditPost(post, authedUser) {
+    return (dispatch) => {
+        api.editPost(post, authedUser)
+            .then((post) => {
+                dispatch(editPost(post))
             });
     }
 }
