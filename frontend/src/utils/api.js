@@ -4,9 +4,7 @@ const api = process.env.REACT_APP_BACKEND || 'http://localhost:3001';
 export function getCategories(authUser) {
     const url = `${api}/categories`;
     return fetch(url, {
-        headers: { Authorization: authUser },
-        credentials: "include",
-      
+        headers: { Authorization: authUser }
     }).then((res) => {
         return res.json();
     }).then(result => {
@@ -25,7 +23,6 @@ export function addPost(post, authedUser) {
     return fetch(url, {
         method: 'POST',
         headers: { Authorization: authedUser },
-        credentials: "include",
         body: JSON.stringify(post)
     }).then((res) => {
         return res.json();
@@ -42,9 +39,7 @@ export function editPost(post, authedUser) {
     return fetch(url, {
         method: 'PUT',
         headers: { Authorization: authedUser },
-        credentials: "include",
         body: JSON.stringify(post)
-    
     }).then(() => {
         return Object.assign({}, { [post.id]: post })
     });
@@ -55,8 +50,7 @@ export function deletePost(id, authedUser) {
    
     return fetch(url, {
         method: 'DELETE',
-        headers: { Authorization: authedUser },
-        credentials: "include"
+        headers: { Authorization: authedUser }
     }).then((res) => {
         return res.json();
     })
@@ -67,7 +61,6 @@ export function getPosts(authUser) {
     const url = `${api}/posts`;
     return fetch(url, {
         headers: { Authorization: authUser },
-        credentials: "include"
     }).then((res) => {
         return res.json();
     }).then(posts => {
@@ -80,7 +73,6 @@ export function upVotePost(authUser, id) {
     const url = `${api}/posts/${id}`;
     return fetch(url, {
         headers: { Authorization: authUser },
-        credentials: "include",
         method: 'POST',
         body: 'upVote'
     });
@@ -90,7 +82,6 @@ export function downVotePost(authUser, id) {
     const url = `${api}/posts/${id}`;
     return fetch(url, {
         headers: { Authorization: authUser },
-        credentials: "include",
         method: 'POST',
         body: 'downVote'
     });
@@ -100,7 +91,6 @@ export function upVoteComment(authUser, id) {
     const url = `${api}/comments/${id}`;
     return fetch(url, {
         headers: { Authorization: authUser },
-        credentials: "include",
         method: 'POST',
         body: 'upVote'
     });
@@ -110,7 +100,6 @@ export function downVoteComment(authUser, id) {
     const url = `${api}/comments/${id}`;
     return fetch(url, {
         headers: { Authorization: authUser },
-        credentials: "include",
         method: 'POST',
         body: 'downVote'
     });
@@ -119,8 +108,7 @@ export function downVoteComment(authUser, id) {
 export function getCommentsForPost(postId, authUser) {
     const url = `${api}/posts/${postId}/comments`;
     return fetch(url, {
-        headers: { Authorization: authUser },
-        credentials: "include"
+        headers: { Authorization: authUser }
     }).then((res) => {
         return res.json();
     }).then(comments => {
@@ -136,7 +124,6 @@ export function addComment(comment, authedUser) {
     return fetch(url, {
         method: 'POST',
         headers: { Authorization: authedUser },
-        credentials: "include",
         body: JSON.stringify(comment)
     }).then((res) => {
         return res.json();
@@ -155,7 +142,6 @@ export function editComment(comment, authedUser) {
     return fetch(url, {
         method: 'PUT',
         headers: { Authorization: authedUser },
-        credentials: "include",
         body: JSON.stringify(comment)
     }).then(() => {
         return Object.assign({}, { [comment.id]: comment })
@@ -167,8 +153,7 @@ export function deleteComment(id, authedUser) {
    
     return fetch(url, {
         method: 'DELETE',
-        headers: { Authorization: authedUser },
-        credentials: "include"
+        headers: { Authorization: authedUser }
     }).then((res) => {
         return res.json();
     })
