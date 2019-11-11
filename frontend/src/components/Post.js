@@ -56,36 +56,37 @@ class Post extends Component {
         if (toHome) {
             return <Redirect to='/' />
         }
-        if (this.props.post) {
-            const { title, author, commentCount, voteScore, timestamp, category, id, body } = this.props.post;
-            return (
-                <div className='post'>
-                    <Link to={`/${category}/${id}`}><h1> {title} </h1> </Link>
-                    {showBody && <p>{body}</p>}
-                    <p style={{ fontStyle: 'italic' }}>Posted by {author} on {formatDate(timestamp)}</p>
-                    <ul className='footer'>
-                        <li>
-                            <span className='icon'>{upVoted ? <FaThumbsUp onClick={this.upVote} /> :
-                                <FaRegThumbsUp onClick={this.upVote} />} </span></li>
-                        <li><span>{voteScore}</span></li>
-                        <li className='bullet'><span className='icon'>{downVoted ? <FaThumbsDown onClick={this.downVote} /> :
-                            <FaRegThumbsDown onClick={this.downVote} />}  </span>
-                        </li>
-                        <li className='bullet'>{commentCount} comments </li>
-                        <li className='bullet'>
-                            <span className='icon'>
-                                <Link to={`/posts/edit/${id}`} >
-                                    <FaPen />
-                                </Link>
-                            </span>
-
-                        </li>
-                        <li><span className='icon'><FaTrash onClick={this.delete} /></span></li>
-                    </ul>
-                </div>
-            )
+        if (!this.props.post) {
+            return <Redirect to='/NoMatch'/>
         }
-        return null;
+        const { title, author, commentCount, voteScore, timestamp, category, id, body } = this.props.post;
+        return (
+            <div className='post'>
+                <Link to={`/${category}/${id}`}><h1> {title} </h1> </Link>
+                {showBody && <p>{body}</p>}
+                <p style={{ fontStyle: 'italic' }}>Posted by {author} on {formatDate(timestamp)}</p>
+                <ul className='footer'>
+                    <li>
+                        <span className='icon'>{upVoted ? <FaThumbsUp onClick={this.upVote} /> :
+                            <FaRegThumbsUp onClick={this.upVote} />} </span></li>
+                    <li><span>{voteScore}</span></li>
+                    <li className='bullet'><span className='icon'>{downVoted ? <FaThumbsDown onClick={this.downVote} /> :
+                        <FaRegThumbsDown onClick={this.downVote} />}  </span>
+                    </li>
+                    <li className='bullet'>{commentCount} comments </li>
+                    <li className='bullet'>
+                        <span className='icon'>
+                            <Link to={`/posts/edit/${id}`} >
+                                <FaPen />
+                            </Link>
+                        </span>
+
+                    </li>
+                    <li><span className='icon'><FaTrash onClick={this.delete} /></span></li>
+                </ul>
+            </div>
+        )
+
     }
 }
 

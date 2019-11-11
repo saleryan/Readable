@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Post from './Post'
-import { NavLink, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { FaLongArrowAltUp, FaLongArrowAltDown, FaPlusCircle } from 'react-icons/fa/index'
 
 
@@ -33,7 +33,7 @@ class Posts extends Component {
     }
 
     render() {
-        const { posts, categories } = this.props;
+        const { posts } = this.props;
         const { sortBy, direction } = this.state;
         const sortedPosts = posts.sort((a, b) =>
             sortBy === SORT_BY.VOTE ?
@@ -45,23 +45,7 @@ class Posts extends Component {
         const sortOptions = Object.keys(SORT_BY).map((sortKey) => (SORT_BY[sortKey]));
         return (
             <div className='posts-container'>
-                <div className='top-bar'>
-                    <nav className='nav'>
-                        <ul>
-                            <li>
-                                <NavLink to='/' exact activeClassName='active'>
-                                    All
-         				 </NavLink>
-                            </li>
-                            {categories.map(cat =>
-                                (<li key={cat.name}>
-                                    <NavLink key={cat.name} to={cat.path} activeClassName='active'>
-                                        {cat.name}
-                                    </NavLink>
-                                </li>
-                                ))}
-                        </ul>
-                    </nav>
+               
                     <div className='sort'>
 
                         <label> Sort By </label>
@@ -71,7 +55,7 @@ class Posts extends Component {
                         {direction === DIRECTION.ASC ? <FaLongArrowAltUp size={20} style={{ marginBottom: '-5px' }} onClick={this.handleSortAsc} /> :
                             <FaLongArrowAltDown size={20} style={{ marginBottom: '-5px' }} onClick={this.handleSortDesc} />}
                     </div>
-                </div>
+              
                 {sortedPosts.length > 0 && <ul className='posts'>
                     {posts.map(post => <li key={post.id}><Post key={post.id} id={post.id} /></li>)}
                 </ul>}

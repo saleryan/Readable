@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { FaThumbsDown, FaRegThumbsDown, FaThumbsUp, FaRegThumbsUp, FaTrash, FaPen } from 'react-icons/fa/index'
 import { handleUpVoteComment, handleDownVoteComment, handleDeleteComment } from '../actions/comments'
 import { formatDate } from '../utils/helper';
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 
 class Comment extends Component {
     state = {
@@ -45,6 +45,9 @@ class Comment extends Component {
     render() {
         const { body, voteScore, author, timestamp, id, parentId } = this.props.comment;
         const { upVoted, downVoted } = this.state;
+        if (!this.props.comment) {
+            return <Redirect to='/NoMatch'/>
+        }
         return (<div className='comment'>
             <p style={{ fontStyle: 'italic' }}>Posted by {author} on {formatDate(timestamp)}</p>
             <p>{body} </p>
